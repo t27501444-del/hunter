@@ -1,14 +1,80 @@
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
-    <meta charset="UTF-8">
-    <title>Hunter</title>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<title>Hunter</title>
+
+<link rel="stylesheet" href="style.css">
+
 </head>
+
 <body>
 
-<h1>Hunter</h1>
+<div class="container">
 
-<p>APK 다운로드 페이지입니다.</p>
+    <img class="logo" src="images/logo.png">
+
+    <h1>Hunter</h1>
+
+    <p class="subtitle">
+        Android 자동화 도우미
+    </p>
+
+    <div class="card">
+
+        <div class="version">
+            최신버전
+            <span id="version">불러오는 중...</span>
+        </div>
+
+        <div class="downloads">
+            다운로드
+            <span id="downloads">-</span>회
+        </div>
+
+        <a
+            id="downloadButton"
+            class="downloadButton"
+            href="#">
+
+            APK 다운로드
+
+        </a>
+
+    </div>
+
+    <div class="card">
+
+        <h2>업데이트 내역</h2>
+
+        <pre id="releaseNote"></pre>
+
+    </div>
+
+    <div class="card">
+
+        <h2>스크린샷</h2>
+
+        <div class="gallery">
+
+            <img src="images/screenshot1.png">
+
+            <img src="images/screenshot2.png">
+
+            <img src="images/screenshot3.png">
+
+        </div>
+
+    </div>
+
+</div>
+
+<script src="app.js"></script>
 
 </body>
+
 </html>
