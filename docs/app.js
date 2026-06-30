@@ -7,12 +7,12 @@ const packageName = "com.noroo.user";
 
 // apk 다운로드 주소
 const apkUrl =
-    "https://username.github.io/myapp/app-release.apk";
+    "https://github.com/t27501444-del/hunter/releases/download/user.2026.07.01.0703/2026.07.01.0703-com.noroo.user-release.apk";
 
 //-----------------------------------------
 
 const intentUrl =
-`intent://open/#Intent;
+`intent://user/#Intent;
 scheme=noroo;
 package=${packageName};
 end`;
