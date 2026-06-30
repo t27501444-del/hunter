@@ -3,7 +3,7 @@
 //-----------------------------------------
 
 // AndroidManifest의 intent-filter
-const packageName = "com.company.myapp";
+const packageName = "com.noroo.user";
 
 // apk 다운로드 주소
 const apkUrl =
@@ -13,7 +13,7 @@ const apkUrl =
 
 const intentUrl =
 `intent://open/#Intent;
-scheme=myapp;
+scheme=noroo;
 package=${packageName};
 end`;
 
