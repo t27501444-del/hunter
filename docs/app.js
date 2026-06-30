@@ -1,28 +1,43 @@
-const USER = "t27501444-de1";
-const REPO = "hunter";
-const api =
-`https://api.github.com/repos/${USER}/${REPO}/releases/latest`;
+//-----------------------------------------
+// 수정
+//-----------------------------------------
 
-fetch(api)
+// AndroidManifest의 intent-filter
+const packageName = "com.company.myapp";
 
-.then(r=>r.json())
+// apk 다운로드 주소
+const apkUrl =
+    "https://username.github.io/myapp/app-release.apk";
 
-.then(data=>{
+//-----------------------------------------
 
-document.getElementById("version").innerText=data.tag_name;
+const intentUrl =
+`intent://open/#Intent;
+scheme=myapp;
+package=${packageName};
+end`;
 
-const asset=data.assets[0];
+document
+.getElementById("installButton")
+.addEventListener("click", launchApp);
 
-document.getElementById("downloads").innerText=asset.download_count;
+function launchApp(){
 
-document.getElementById("downloadButton").href=asset.browser_download_url;
+    const start = Date.now();
 
-document.getElementById("releaseNote").innerText=data.body;
+    window.location = intentUrl;
 
-})
+    setTimeout(function(){
 
-.catch(error=>{
+        // 앱이 실행되면 브라우저가 백그라운드로 가므로
+        // elapsed 시간이 거의 증가하지 않음
 
-console.log(error);
+        if(Date.now() - start < 2000){
 
-});
+            window.location = apkUrl;
+
+        }
+
+    },1500);
+
+}
