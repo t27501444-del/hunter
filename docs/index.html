@@ -1,35 +1,23 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport"
-      content="width=device-width, initial-scale=1.0">
-
-<title>앱 다운로드</title>
-
-<link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HUNTER</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <div class="container">
+        <h1 class="title">HUNTER</h1>
+        <div class="info-box">
+            <span class="label">ID:</span>
+            <span id="user-id" class="value">로딩 중...</span>
+        </div>
+        <p id="copy-message" class="message">링크가 클립보드에 복사되었습니다.</p>
+        
+        <button id="download-btn" class="btn">앱 다운로드 및 설치</button>
+    </div>
 
-<div class="container">
-
-    <h1>HUNTER</h1>
-
-      
-    <p>ID : <span id="idValue"></span></p>
-      
-    <p>
-        설치되어 있다면 자동으로 실행됩니다.<br>
-        설치되어 있지 않으면 APK 다운로드가 시작됩니다.
-    </p>
-
-    <button id="installButton">
-        앱 실행 / 설치
-    </button>
-
-</div>
-
-<script src="app.js"></script>
-
+    <script href="app.js"></script>
 </body>
 </html>
