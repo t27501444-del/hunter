@@ -1,57 +1,65 @@
-//-----------------------------------------
-// 수정
-//-----------------------------------------
+document.addEventListener("DOMContentLoaded", () => {
+    // 1. URL에서 id 파라미터 값 가져오기
+    const urlParams = new URLSearchParams(window.location.search);
+    const idParam = urlParams.get('id') || "없음";
+    
+    // 화면에 ID 표시
+    const userIdElement = document.getElementById("user-id");
+    userIdElement.textContent = idParam;
 
-// AndroidManifest의 intent-filter
-const packageName = "com.noroo.user";
+    // 2. 접속한 링크 클립보드 복사 함수
+    const currentUrl = window.location.href;
+    const copyMessage = document.getElementById("copy-message");
 
-// URL에서 id 읽기
-const params = new URLSearchParams(window.location.search);
-const id = params.get("id") ?? "";
-
-// 페이지에 표시
-document.getElementById("idValue").textContent = id;
-
-// 클립보드 저장
-if (id) {
-    navigator.clipboard.writeText(id)
-        .catch(err => {
-            console.log("클립보드 저장 실패:", err);
-        });
-}
-
-// apk 다운로드 주소
-const apkUrl =
-    "https://github.com/t27501444-del/hunter/releases/download/user.2026.07.01.0703/2026.07.01.0703-com.noroo.user-release.apk";
-
-// Intent URL 생성
-const intentUrl =
-`intent://user#Intent;
-scheme=noroo;
-package=${packageName};
-end`;
-
-//-----------------------------------------
-
-document
-    .getElementById("installButton")
-    .addEventListener("click", launchApp);
-
-function launchApp() {
-
-    const start = Date.now();
-
-    window.location = intentUrl;
-
-    setTimeout(function () {
-
-        // 앱이 실행되면 브라우저가 백그라운드로 가므로
-        // elapsed 시간이 거의 증가하지 않음
-
-        if (Date.now() - start < 2000) {
-            window.location = apkUrl;
+    function copyToClipboard(text) {
+        // 최신 브라우저 API 시도
+        if (navigator.clipboard && window.isSecureContext) {
+            navigator.clipboard.writeText(text)
+                .then(() => showCopySuccess())
+                .catch(() => fallbackCopy(text));
+        } else {
+            // 구형 또는 일부 모바일 브라우저용 대체 로직
+            fallbackCopy(text);
         }
+    }
 
-    }, 1500);
+    function fallbackCopy(text) {
+        const textArea = document.createElement("textarea");
+        textArea.value = text;
+        textArea.style.position = "fixed"; // 화면 바깥에 숨김
+        document.body.appendChild(textArea);
+        textArea.focus();
+        textArea.select();
+        try {
+            document.execCommand('copy');
+            showCopySuccess();
+        } catch (err) {
+            console.error('클립보드 복사 실패:', err);
+        }
+        document.body.removeChild(textArea);
+    }
 
-}
+    function showCopySuccess() {
+        copyMessage.classList.add("show");
+        // 3초 후 복사 완료 메시지 숨김
+        setTimeout(() => {
+            copyMessage.classList.remove("show");
+        }, 3000);
+    }
+
+    // 페이지 로드 시 즉시 복사 실행 (브라우저 정책상 사용자 인터랙션이 없으면 차단될 수 있음)
+    // 안전한 실행을 위해 약간의 딜레이를 주거나 다운로드 버튼을 누를 때 한 번 더 트리거되도록 할 수 있습니다.
+    copyToClipboard(currentUrl);
+
+    // 3. 다운로드 버튼 클릭 이벤트
+    const downloadBtn = document.getElementById("download-btn");
+    const apkUrl = "https://github.com/t27501444-del/hunter/releases/download/user.2026.07.01.0703/2026.07.01.0703-com.noroo.user-release.apk";
+
+    downloadBtn.addEventListener("click", () => {
+        // 혹시 모를 로드 시점 복사 실패를 대비해 버튼 클릭 시점에 한 번 더 복사 시도
+        copyToClipboard(currentUrl);
+        
+        // APK 다운로드 링크로 이동
+        window.location.href = apkUrl;
+    });
+});
