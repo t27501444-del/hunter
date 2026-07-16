@@ -112,7 +112,7 @@ html {
 
 .version {
     color: #ffffff;
-    margin-bottom: 16px;   /* 12~24px 정도 추천 */
+    margin-bottom: 32px;
     font-weight: 700;
     font-size: 0.95rem;
     word-break: break-all; /* 긴 ID가 박스 밖으로 삐져나가지 않도록 줄 바꿈 강제 */
