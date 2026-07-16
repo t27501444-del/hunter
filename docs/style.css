@@ -110,6 +110,14 @@ html {
     max-width: 100%;
 }
 
+.version {
+    color: #ffffff;
+    font-weight: 700;
+    font-size: 0.95rem;
+    word-break: break-all; /* 긴 ID가 박스 밖으로 삐져나가지 않도록 줄 바꿈 강제 */
+    max-width: 100%;
+}
+
 /* 복사 성공 알림 메시지 */
 .message {
     font-size: 0.8rem;
